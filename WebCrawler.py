@@ -9,18 +9,17 @@ import json
 from collections import OrderedDict
 import time
 
-from dotenv import load_dotenv
-
-from re import T
 from selenium import webdriver
 from fake_useragent import UserAgent
 from selenium.common.exceptions import NoSuchElementException
 
-# Get values from .env file
-load_dotenv()
-client_id = os.environ.get('id')
-client_secret = os.environ.get('secret')
-direct = os.environ.get('dir')
+# Get values from env.json file
+with open(os.path.dirname(os.path.realpath(__file__)) + "/env.json", 'r') as f:
+    env_file = json.load(f)
+
+client_id = env_file['ID']
+client_secret = env_file['SECRET']
+direct = env_file['DIR']
 
 # Use chromedriver for crawling
 options = webdriver.ChromeOptions()
@@ -41,7 +40,7 @@ driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
 })
 
 # Input keyword and display
-keyword = "사과"
+keyword = "당근"
 display = "100"
 
 # Get eco-friendly products for keywords from API
