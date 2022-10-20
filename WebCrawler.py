@@ -10,7 +10,6 @@ from collections import OrderedDict
 import time
 
 from selenium import webdriver
-from fake_useragent import UserAgent
 from selenium.common.exceptions import NoSuchElementException
 
 # Get values from env.json file
@@ -24,8 +23,6 @@ direct = env_file['DIR']
 # Use chromedriver for crawling
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-blink-features=AutomationControlled")
-user_ag = UserAgent().random
-options.add_argument('user-agent=%s'%user_ag)
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
 options.add_experimental_option("useAutomationExtension", False)
 options.add_experimental_option("prefs", {"prfile.managed_default_content_setting.images": 2})
